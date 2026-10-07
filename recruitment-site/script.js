@@ -48,18 +48,18 @@ function validPhone(value) {
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const name = form.name.value.trim();
-  const phone = form.phone.value.trim();
-  const platform = form.platform.value;
+  const name = form.elements.name.value.trim();
+  const phone = form.elements.phone.value.trim();
+  const platform = form.elements.platform.value;
 
-  form.name.classList.toggle("invalid", name.length < 2);
-  form.phone.classList.toggle("invalid", !validPhone(phone));
+  form.elements.name.classList.toggle("invalid", name.length < 2);
+  form.elements.phone.classList.toggle("invalid", !validPhone(phone));
 
   if (name.length < 2) return setMsg("Please enter your full name.", "err");
   if (!validPhone(phone)) return setMsg("Please enter a valid phone number, including country code.", "err");
 
   // Honeypot: real people never fill this hidden field
-  if (form.website.value) return setMsg("Thanks! We'll be in touch soon.", "ok");
+  if (form.elements.website.value) return setMsg("Thanks! We'll be in touch soon.", "ok");
 
   if (CONFIG.sheetEndpoint.startsWith("PASTE_")) {
     return setMsg("Form not connected yet: add your Apps Script URL in script.js.", "err");
